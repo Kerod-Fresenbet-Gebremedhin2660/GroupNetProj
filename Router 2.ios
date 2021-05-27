@@ -61,4 +61,5 @@ ip nat pool group8 10.5.81.5 10.5.81.9 netmask 255.255.255.0
 
 !=====DHCP Server=====!
 !Excluded Addresses!
+!Excluded the first 5 addresses!
 !DHCP Pools!
