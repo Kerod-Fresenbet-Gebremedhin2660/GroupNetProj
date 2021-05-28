@@ -1,7 +1,9 @@
+!============VLAN Creation==============!
 vlan 10
 vlan 20
+!============VLAN Creation==============!
 
-
+!============Interface Configuration=================!
 interface f0/2
 switchport mode access
 switchport access vlan 20
@@ -17,5 +19,5 @@ int vlan 10
 ip add 172.16.10.2 255.255.255.0
 int vlan 20
 ip add 172.16.20.2 255.255.255.0
-
+!============Interface Configuration=================!
 

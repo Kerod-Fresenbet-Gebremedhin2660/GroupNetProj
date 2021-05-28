@@ -56,6 +56,9 @@ ip dhcp excluded-address 172.16.40.1 172.16.40.5
 !Excluded the first 5 addresses!
 !=====DHCP Server=====!
 
+
+
+
 !=========DHCP Pools===========!
 ip dhcp pool VLAN_1
 network 172.16.10.0 255.255.255.0
