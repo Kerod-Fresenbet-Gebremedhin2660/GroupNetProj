@@ -1,23 +1,62 @@
+!======Serial /30 =======!
 int s0/0/0
 ip address 172.15.50.2 255.255.255.252
+ip nat inside
 no shut
 clock rate 64000
 encapsulation ppp
 ppp authentication chap
 username router2 pass cisco
+!======Serial /30 =======!
 
+!=============OSPF=======================!
 router ospf 1
 network 172.16.30.0 255.255.255.0 area 0
 network 172.16.40.0 255.255.255.0 area 0
 network 172.16.50.0 255.255.255.252 area 0
+!=============OSPF=======================!
 
 
-ip dhcp excluded-addresses 172.16.10.2 172.16.10.5
-ip dhcp excluded-addresses 172.16.20.2 172.16.20.5
-ip dhcp excluded-addresses 172.16.30.2 172.16.30.5
-ip dhcp excluded-addresses 172.16.40.2 172.16.40.5
 
 
+!====================Gig Links================!
+int g0/0
+no shut
+int g0/0.30
+encapsulation dot1q 30
+ip add 172.16.30.1 255.255.255.0
+ip nat inside
+
+int g0/0.40
+encapsulation dot1q 40
+ip add 172.16.40.1 255.255.255.0
+ip nat inside
+!====================Gig Links================!
+
+
+
+!=====================NAT======================!
+int g0/1
+ip nat outside
+access-list 1 permit 172.16.50.0 255.255.255.0
+ip nat inside source list 1 pool group8
+access-list 1 permit 172.16.30.1 255.255.255.0
+ip nat inside source list 1 pool group8
+access-list 1 permit 172.16.40.0 255.255.255.0
+ip nat pool group8 10.5.81.5 10.5.81.9 netmask 255.255.255.0
+!=====================NAT======================!
+
+
+
+!=====DHCP Server=====!
+!Excluded the first Addresses!
+ip dhcp excluded-address 172.16.20.1 172.16.20.5
+ip dhcp excluded-address 172.16.30.1 172.16.30.5
+ip dhcp excluded-address 172.16.40.1 172.16.40.5
+!Excluded the first 5 addresses!
+!=====DHCP Server=====!
+
+!=========DHCP Pools===========!
 ip dhcp pool VLAN_1
 network 172.16.10.0 255.255.255.0
 default-router 172.16.10.1
@@ -33,33 +72,4 @@ default-router 172.16.30.1
 ip dhcp pool VLAN_4
 network 172.16.40.0 255.255.255.0
 default-router 172.16.40.1
-
-int g0/0
-no shut
-int g0/0.30
-encapsulation dot1q 30
-ip add 172.16.30.1 255.255.255.0
-ip nat inside
-
-int g0/0.40
-encapsulation dot1q 40
-ip add 172.16.40.1 255.255.255.0
-ip nat inside
-
-int s0/0/0
-ip add 172.16.50.2 255.255.255.252
-ip nat inside
-
-int g0/1
-ip nat outside
-access-list 1 permit 172.16.50.0 255.255.255.0
-ip nat inside source list 1 pool group8
-access-list 1 permit 172.16.30.1 255.255.255.0
-ip nat inside source list 1 pool group8
-access-list 1 permit 172.16.40.0 255.255.255.0
-ip nat pool group8 10.5.81.5 10.5.81.9 netmask 255.255.255.0
-
-!=====DHCP Server=====!
-!Excluded Addresses!
-!Excluded the first 5 addresses!
-!DHCP Pools!
+!=========DHCP Pools===========!
