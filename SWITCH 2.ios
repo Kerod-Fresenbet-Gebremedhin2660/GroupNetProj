@@ -1,6 +1,10 @@
+!============VLAN Creation==============!
 vlan 30
 vlan 40
+!============VLAN Creation==============!
 
+
+!============Interface Configuration=================!
 interface f0/2
 switchport mode access
 switchport access vlan 30
@@ -16,4 +20,4 @@ int vlan 30
 ip add 172.16.30.2 255.255.255.0
 int vlan 40
 ip add 172.16.40.2 255.255.255.0
-
+!============Interface Configuration=================!

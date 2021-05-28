@@ -1,4 +1,4 @@
-hostname SW<>
+hostname SW<number>
 no ip domain-lookup
 enable secret class
 line con 0
@@ -10,4 +10,4 @@ password cisco
 login
 exit
 service password-encryption
-banner motd # Authorized Personnel Only #
+banner motd #Authorized Personnel Only#

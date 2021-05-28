@@ -36,11 +36,16 @@ ip nat inside
 
 
 !=====================NAT======================!
-int g0/1
+interface s0/0/0
+ip nat inside
+interface g0/0
+ip nat inside
+interface g0/1
 ip nat outside
+
 access-list 1 permit 172.16.50.0 255.255.255.0
 ip nat inside source list 1 pool group8
-access-list 1 permit 172.16.30.1 255.255.255.0
+access-list 1 permit 172.16.30.0 255.255.255.0
 ip nat inside source list 1 pool group8
 access-list 1 permit 172.16.40.0 255.255.255.0
 ip nat pool group8 10.5.81.5 10.5.81.9 netmask 255.255.255.0
@@ -49,7 +54,7 @@ ip nat pool group8 10.5.81.5 10.5.81.9 netmask 255.255.255.0
 
 
 !=====DHCP Server=====!
-!Excluded the first Addresses!
+!Excluded the first  5 Addresses!
 ip dhcp excluded-address 172.16.20.1 172.16.20.5
 ip dhcp excluded-address 172.16.30.1 172.16.30.5
 ip dhcp excluded-address 172.16.40.1 172.16.40.5
