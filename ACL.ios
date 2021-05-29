@@ -9,3 +9,8 @@ deny tcp 172.16.10.0 0.0.0.255 172.16.30.0 0.0.0.255 eq 80
 deny tcp 172.16.10.0 0.0.0.255 172.16.30.0 0.0.0.255 eq 443
 deny icmp 172.16.10.0 0.0.0.255 172.16.30.0 0.0.0.255 net-unreachable
 !=========Extended ACL============!
+
+!=========Apply Extended ACL============!
+!Interface Serial 0/0/0
+interface serial 0/0/0
+ip access-group VLAN10-30 out
