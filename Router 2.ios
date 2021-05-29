@@ -89,5 +89,6 @@ default-router 172.16.40.1
 ! For performance sakes configure using next hop address
 ! You have no option but to configure using exit interface on R2 since we technically don't know next hop
 ip route 0.0.0.0 0.0.0.0 <next hop address>
+!router-ospf 1
 default-information originate
 !=========Static Route===========!
