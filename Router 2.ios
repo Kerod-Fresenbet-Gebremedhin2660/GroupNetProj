@@ -81,3 +81,13 @@ ip dhcp pool VLAN_4
 network 172.16.40.0 255.255.255.0
 default-router 172.16.40.1
 !=========DHCP Pools===========!
+
+
+
+!=========Static Route===========!
+! Router 1 and 2
+! For performance sakes configure using next hop address
+! You have no option but to configure using exit interface on R2 since we technically don't know next hop
+ip route 0.0.0.0 0.0.0.0 <next hop address>
+default-information originate
+!=========Static Route===========!
