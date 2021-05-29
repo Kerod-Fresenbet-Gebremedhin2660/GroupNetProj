@@ -1,0 +1,11 @@
+!ACL so that PC1 does not ping PC3
+!The entire 172.16.10.0 255.255.255.0 network not supposed to reach
+!the 172.16.30.0 network
+
+!=========Extended ACL============!
+! Configure on R1 Serial 0/0/0 interface
+ip access-list extended VLAN10-30
+deny tcp 172.16.10.0 0.0.0.255 172.16.30.0 0.0.0.255 eq 80
+deny tcp 172.16.10.0 0.0.0.255 172.16.30.0 0.0.0.255 eq 443
+deny icmp 172.16.10.0 0.0.0.255 172.16.30.0 0.0.0.255 net-unreachable
+!=========Extended ACL============!
